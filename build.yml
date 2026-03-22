@@ -1,0 +1,41 @@
+name: Build Geode Mod
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+        - name: Windows
+          os: windows-latest
+        - name: Android64
+          os: ubuntu-latest
+          target: Android64
+        - name: Android32
+          os: ubuntu-latest
+          target: Android32
+
+    name: ${{ matrix.config.name }}
+    runs-on: ${{ matrix.config.os }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Setup Geode
+        uses: geode-sdk/setup-geode@v3
+        with:
+          # This ensures the "FindGeode" error goes away
+          sdk: v3.0.0-beta.1 
+
+      - name: Build Mod
+        uses: geode-sdk/build-geode-mod@main
+        with:
+          combine: true
+          target: ${{ matrix.config.target }}
