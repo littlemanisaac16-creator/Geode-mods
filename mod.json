@@ -1,0 +1,14 @@
+{
+	"geode": "3.3.0",
+	"gd": "2.206",
+	"id": "littlemanisaac.death_message",
+	"version": "v1.0.0",
+	"name": "Death Message",
+	"developer": "littlemanisaac",
+	"description": "Displays a message on-screen when you die.",
+	"resources": {
+		"files": [
+			"resources/messages.txt"
+		]
+	}
+}
